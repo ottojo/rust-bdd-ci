@@ -38,21 +38,3 @@ jobs:
           publish_dir: ./target/criterion
           destination_dir: ${{ github.ref_name }}
           exclude_assets: '**/*.json,**/*.csv'
-
-      - name: Update deployment status (success)
-        if: success()
-        uses: chrnorm/deployment-status@releases/v1
-        with:
-          token: "${{ github.token }}"
-          target_url: https://ottojo.github.io/rust-bdd-ci/${{ github.ref_name }}/
-          state: "success"
-          deployment_id: ${{ github.ref_name }}
-
-      - name: Update deployment status (failure)
-        if: failure()
-        uses: chrnorm/deployment-status@releases/v1
-        with:
-          token: "${{ github.token }}"
-          target_url: https://ottojo.github.io/rust-bdd-ci/${{ github.ref_name }}/
-          state: "failure"
-          deployment_id: ${{ github.ref_name }}
