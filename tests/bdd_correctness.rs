@@ -1,11 +1,9 @@
 #[cfg(test)]
 mod tests {
 
-    use std::collections::HashMap;
-
     use boolean_expression::BDD;
-
     use rust_bdd_ci::{example_expr, RiverCrossing};
+    use std::collections::HashMap;
 
     fn get_bit_at(input: usize, n: u32) -> bool {
         if n < usize::BITS {
