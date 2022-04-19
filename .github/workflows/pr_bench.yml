@@ -24,6 +24,7 @@ jobs:
         name: Checkout merge commit
         with:
           ref: ${{ github.ref }}
+          clean: false
       - uses: actions-rs/cargo@v1
         name: Benchmark merge commit
         with:
