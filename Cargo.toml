@@ -9,8 +9,16 @@ edition = "2021"
 boolean_expression = "0.4.4"
 
 [dev-dependencies]
-criterion = "0.3"
+criterion = { version = "0.3", features = ["html_reports"] }
 
 [[bench]]
 name = "build_bdd"
 harness = false
+
+[lib]
+bench = false
+
+[[bin]]
+name = "bdd_test"
+path = "src/main.rs"
+bench = false
