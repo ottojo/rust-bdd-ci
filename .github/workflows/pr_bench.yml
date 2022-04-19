@@ -29,4 +29,4 @@ jobs:
         name: Benchmark merge commit
         with:
           command: bench
-          args: -- --baseline bl
+          args: -- --baseline bl --color always
