@@ -12,5 +12,5 @@ boolean_expression = "0.4.4"
 criterion = "0.3"
 
 [[bench]]
-name = "my_benchmark"
+name = "build_bdd"
 harness = false
