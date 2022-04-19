@@ -1,5 +1,5 @@
 use boolean_expression::{Expr, BDD};
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{criterion_group, criterion_main, Criterion};
 
 #[derive(Clone, Hash, Eq, PartialEq, Debug)]
 enum RiverCrossing {
