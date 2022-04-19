@@ -30,3 +30,9 @@ jobs:
         with:
           command: bench
           args: -- --baseline bl --color always
+      - uses: peaceiris/actions-gh-pages@v3
+        name: Deploy
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target/criterion/report
+          destination_dir: ${{ github.ref_name }}
