@@ -9,8 +9,6 @@ fn bench_build_bdd(c: &mut Criterion) {
         b.iter(|| {
             let mut bdd = BDD::new();
             bdd.from_expr(&allowed);
-            bdd.from_expr(&allowed);
-            bdd.from_expr(&allowed);
             bdd.from_expr(&allowed)
         })
     });

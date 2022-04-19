@@ -36,4 +36,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./target/criterion
           destination_dir: ${{ github.ref_name }}
-          exclude_assets: '*.json,*.csv'
+          exclude_assets: '**/*.json,**/*.csv'
