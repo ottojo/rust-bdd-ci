@@ -37,7 +37,7 @@ jobs:
         with:
           token: "${{ github.token }}"
           target_url: https://ottojo.github.io/${{ github.ref_name }}/report/
-          # ref: ${{ github.payload.pull_request.head.ref }}
+          ref: ${{ github.head_ref }}
 
       - uses: peaceiris/actions-gh-pages@v3
         name: Deploy
