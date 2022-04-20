@@ -36,7 +36,6 @@ jobs:
         id: deployment
         with:
           token: "${{ github.token }}"
-          target_url: https://ottojo.github.io/${{ github.ref_name }}/report/
           ref: ${{ github.head_ref }}
 
       - uses: peaceiris/actions-gh-pages@v3
@@ -52,7 +51,7 @@ jobs:
         uses: chrnorm/deployment-status@master
         with:
           token: "${{ github.token }}"
-          environment_url: https://ottojo.github.io/${{ github.ref_name }}/report/
+          environment_url: https://ottojo.github.io/rust-bdd-ci/${{ github.ref_name }}/report/
           state: "success"
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
 
