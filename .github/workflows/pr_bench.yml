@@ -38,3 +38,9 @@ jobs:
           publish_dir: ./target/criterion
           destination_dir: ${{ github.ref_name }}
           exclude_assets: '**/*.json,**/*.csv'
+      - uses: chrnorm/deployment-action@releases/v1
+        name: Create GitHub deployment
+        id: deployment
+        with:
+          token: "${{ github.token }}"
+          target_url: https://ottojo.github.io/${{ github.ref_name }}/report/
