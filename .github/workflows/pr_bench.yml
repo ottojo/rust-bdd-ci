@@ -53,6 +53,7 @@ jobs:
         with:
           token: "${{ github.token }}"
           target_url: https://ottojo.github.io/${{ github.ref_name }}/report/
+          log_url: https://ottojo.github.io/${{ github.ref_name }}/report/
           state: "success"
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
 
