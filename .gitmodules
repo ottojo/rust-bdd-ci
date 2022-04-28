@@ -1,0 +1,3 @@
+[submodule "boolean_expression"]
+	path = boolean_expression
+	url = git@github.com:ottojo/boolean_expression.git

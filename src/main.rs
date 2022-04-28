@@ -13,11 +13,12 @@ fn main() {
     let mut bdd = BDD::new();
     let allowed_func = bdd.from_expr(&allowed);
     let dot = bdd.to_dot(allowed_func);
+    println!("{:?}", bdd);
 
     let expr_result = allowed.evaluate(&items);
     let bdd_result = bdd.evaluate(allowed_func, &items);
     assert!(expr_result == bdd_result);
 
-    println!("{}", dot);
+    //println!("{}", dot);
     println!("Result: {}", bdd_result);
 }
