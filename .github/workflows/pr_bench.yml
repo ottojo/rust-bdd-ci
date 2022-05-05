@@ -15,6 +15,7 @@ jobs:
         name: Checkout PR base
         with:
           ref: ${{ github.base_ref }}
+          submodules: true
       - uses: actions-rs/cargo@v1
         name: Benchmark PR base
         with:
@@ -25,6 +26,7 @@ jobs:
         with:
           ref: ${{ github.ref }}
           clean: false
+          submodules: true
       - uses: actions-rs/cargo@v1
         name: Benchmark merge commit
         with:
