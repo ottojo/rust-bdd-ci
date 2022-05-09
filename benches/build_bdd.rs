@@ -2,21 +2,7 @@ use std::time::Duration;
 
 use boolean_expression::{Expr, BDD};
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
-use rust_bdd_ci::example_expr;
-
-fn xor_direct(n: u64) -> BDD<u64> {
-    let mut b = BDD::new();
-    let expr = Expr::xor_direct((1..n).collect());
-    b.from_expr(&expr);
-    b
-}
-
-fn xor_ite(n: u64) -> BDD<u64> {
-    let mut b = BDD::new();
-    let expr = Expr::xor_ite((1..n).collect());
-    b.from_expr(&expr);
-    b
-}
+use rust_bdd_ci::{example_expr, xor_direct, xor_ite};
 
 fn bench_xor(c: &mut Criterion) {
     let mut group = c.benchmark_group("xor");

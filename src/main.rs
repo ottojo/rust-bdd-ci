@@ -1,24 +1,25 @@
-use std::collections::HashMap;
+use std::env;
 
-use boolean_expression::BDD;
-use rust_bdd_ci::{example_expr, RiverCrossing};
+use rust_bdd_ci::{xor_direct, xor_ite};
 
 fn main() {
-    let allowed = example_expr();
-    let items = HashMap::from([
-        (RiverCrossing::Fox, false),
-        (RiverCrossing::Chicken, true),
-        (RiverCrossing::Grain, true),
-    ]);
-    let mut bdd = BDD::new();
-    let allowed_func = bdd.from_expr(&allowed);
-    let dot = bdd.to_dot(allowed_func);
-    println!("{:?}", bdd);
+    let n = env::args()
+        .nth(1)
+        .expect("Please specify XOR size")
+        .parse()
+        .unwrap();
 
-    let expr_result = allowed.evaluate(&items);
-    let bdd_result = bdd.evaluate(allowed_func, &items);
-    assert!(expr_result == bdd_result);
+    if n != 0 {
+        let ite_bdd = xor_ite(n);
+        let direct_bdd = xor_direct(n);
+        println!("{} {}", ite_bdd.nodes(), direct_bdd.nodes());
+        return;
+    }
 
-    //println!("{}", dot);
-    println!("Result: {}", bdd_result);
+    println!("# Nr. Options, Nodes using ITE, Nodes using XOR-Ladder");
+    for i in 3..150 {
+        let ite_bdd = xor_ite(i);
+        let direct_bdd = xor_direct(i);
+        println!("{} {} {}", i, ite_bdd.nodes(), direct_bdd.nodes());
+    }
 }
