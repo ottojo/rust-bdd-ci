@@ -45,4 +45,4 @@ jobs:
           exclude_assets: "**/*.json,**/*.csv"
       - name: Advertise published benchmark results
         run: |
-          echo "View benchmark results [here](https://ottojo.github.io/rust-bdd-ci/${{ github.ref_name }}/report/)!" >> $GITHUB_STEP_SUMMARY
+          echo "View benchmark results [here](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ github.ref_name }}/report/)!" >> $GITHUB_STEP_SUMMARY
