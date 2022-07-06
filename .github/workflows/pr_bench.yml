@@ -43,3 +43,6 @@ jobs:
           publish_dir: ./target/criterion
           destination_dir: ${{ github.ref_name }}
           exclude_assets: "**/*.json,**/*.csv"
+      - name: Advertise published benchmark results
+        run: |
+          echo "View benchmark results [here](https://ottojo.github.io/rust-bdd-ci/${{ github.ref_name }}/report/)!" >> $GITHUB_STEP_SUMMARY
