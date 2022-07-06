@@ -4,64 +4,42 @@ on: pull_request
 jobs:
   bench:
     name: Benchmark
-    runs-on: [self-hosted, benchmark]
-    container: ubuntu:20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions-rs/toolchain@v1
+      - name: Install and select latest stable rust toolchain
+        uses: actions-rs/toolchain@v1
         with:
           profile: minimal
           toolchain: stable
           override: true
-      - uses: actions/checkout@v3
-        name: Checkout PR base
+
+      - name: Checkout PR base
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.base_ref }}
           submodules: true
-      - uses: actions-rs/cargo@v1
-        name: Benchmark PR base
+      - name: Benchmark PR base
+        uses: actions-rs/cargo@v1
         with:
           command: bench
           args: -- --save-baseline bl
-      - uses: actions/checkout@v3
-        name: Checkout merge commit
+
+      - name: Checkout merge commit
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.ref }}
           clean: false
           submodules: true
-      - uses: actions-rs/cargo@v1
-        name: Benchmark merge commit
+      - name: Benchmark merge commit
+        uses: actions-rs/cargo@v1
         with:
           command: bench
           args: -- --baseline bl --color always
-      
-      - uses: chrnorm/deployment-action@main
-        name: Create GitHub deployment
-        id: deployment
-        with:
-          token: "${{ github.token }}"
-          ref: ${{ github.head_ref }}
 
-      - uses: peaceiris/actions-gh-pages@v3
-        name: Deploy
+      - name: Publish benchmark using gh-pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./target/criterion
           destination_dir: ${{ github.ref_name }}
-          exclude_assets: '**/*.json,**/*.csv'
-
-      - name: Update deployment status (success)
-        if: success()
-        uses: chrnorm/deployment-status@main
-        with:
-          token: "${{ github.token }}"
-          environment_url: https://ottojo.github.io/rust-bdd-ci/${{ github.ref_name }}/report/
-          state: "success"
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-
-      - name: Update deployment status (failure)
-        if: failure()
-        uses: chrnorm/deployment-status@main
-        with:
-          token: "${{ github.token }}"
-          state: "failure"
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          exclude_assets: "**/*.json,**/*.csv"
