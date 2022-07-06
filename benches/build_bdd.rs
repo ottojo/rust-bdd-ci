@@ -1,9 +1,10 @@
 use std::time::Duration;
 
-use boolean_expression::{Expr, BDD};
+use boolean_expression::BDD;
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
 use rust_bdd_ci::{example_expr, xor_direct, xor_ite};
 
+#[allow(dead_code)]
 fn bench_xor(c: &mut Criterion) {
     let mut group = c.benchmark_group("xor");
     group.sample_size(10);
@@ -29,5 +30,5 @@ fn bench_build_bdd(c: &mut Criterion) {
     });
 }
 
-criterion_group!(benches, bench_build_bdd, bench_xor);
+criterion_group!(benches, bench_build_bdd /*bench_xor*/,);
 criterion_main!(benches);
